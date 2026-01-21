@@ -1,5 +1,4 @@
 import os
-  import json
   import requests
   from flask import Flask, render_template, request, jsonify
   from flask_cors import CORS
@@ -44,7 +43,7 @@ import os
           response = requests.post(
               OPENROUTER_BASE_URL,
               headers={
-                  "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                  "Authorization": "Bearer " + OPENROUTER_API_KEY,
                   "Content-Type": "application/json",
                   "HTTP-Referer": "https://zuma-ai-agent.railway.app",
                   "X-Title": "ZUMA AI Assistant"
@@ -64,9 +63,8 @@ import os
               conversations[session_id].append({"role": "assistant", "content": assistant_message})
               return assistant_message
           else:
-              return f"Error: {response.status_code}"
-
-      except:
+              return "Error: " + str(response.status_code)
+      except Exception as e:
           return "Error: Coba lagi."
 
   @app.route('/')
