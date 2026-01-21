@@ -1,12 +1,12 @@
 import os
 import json
 import requests
-from flask import Flask, from flask_cors import CORS, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
 CORS(app, origins=["https://database-zuma.github.io", "http://localhost:*"])
-# OpenRouter API Configuration
 OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', '')
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -143,4 +143,5 @@ def health():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
 
